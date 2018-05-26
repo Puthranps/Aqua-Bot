@@ -26,7 +26,7 @@ client.on('message', (message) => {
         case 'yuri':
             message.reply('',{
                 files: [
-                    './Yuri.png'
+                    './images/Yuri.png'
                 ]
             });
             break;
