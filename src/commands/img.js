@@ -1,4 +1,3 @@
-const config = require('../../config/google_config.json');
 let Scraper = require('images-scraper');
 let bing = new Scraper.Bing();
 const axios = require('axios');
