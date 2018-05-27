@@ -9,7 +9,8 @@
     "gif-search": "^2.0.1",
     "google-images": "^2.1.0",
     "image-scraper": "^0.2.1",
-    "images-scraper": "^2.0.11"
+    "images-scraper": "^2.0.11",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"

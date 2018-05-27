@@ -1,4 +1,3 @@
-const config = require('../../config/google_config.json');
 let Scraper = require('images-scraper');
 let bing = new Scraper.Bing();
 const axios = require('axios');
@@ -17,7 +16,7 @@ async function getObj(arg) {
 
         return {
             url : results[rand].url,
-            name : arg + results[rand].format
+            name : arg + '.' + results[rand].format
         };
 
     } catch(e) {
@@ -26,14 +25,14 @@ async function getObj(arg) {
 }
 
 async function download(obj) {
-    const path = path.resolve(__dirname, 'images', obj.name);
+    const filepath = path.resolve('../images', obj.name);
     const response = await axios({
         method: 'GET',
         url : obj.url,
         responseType : 'stream'
     });
 
-    response.data.pipe(fs.createWriteStream(path));
+    response.data.pipe(fs.createWriteStream(filepath));
 
     return new Promise((resolve, reject) => {
         response.data.on('end', () => {

@@ -22,8 +22,14 @@ client.on('message', (message) => {
         case 'icon':
             return message.channel.send(message.author.avatarURL); 
         case 'img':
-           return message.reply('',{files:img.upload(args[1])});
+            if(args[1] === null) {
+                return message.channel.send('Please insert a term to search....');
+            }
+           return message.channel.send('',{files:img.upload(args[1])});
         case 'gif':
+            if(args[1] === null) {
+                return message.channel.send('Please insert a term to search....');
+            }
             return message.channel.send(gif.searchGif(args[1]));
         case 'help':
             return message.channel.send(help.displayCommands());
