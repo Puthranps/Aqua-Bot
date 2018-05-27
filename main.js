@@ -2,37 +2,36 @@ const Discord = require('discord.js');
 const {owner,prefix,token,dev} = require('./config.json');
 const client = new  Discord.Client(); 
 const util =  require('./src/utilities/discordHelpers.js');
-
-console.log(prefix);
+const img = require('./src/commands/img.js');
+const gif = require('./src/commands/gif.js');
+const help = require('./src/commands/help.js');
 
 client.on('ready', () => {
-    client.user.setGame('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
-    console.log(`connected to`);
+    client.user.setActivity('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
+    console.log(`connected to ${owner}'s server`);
 });
 
 client.on('message', (message) => {
     let args = util.parseArgs(message.content);
-    let command = util.getCommand(message.content);
-    switch(command){
+
+    switch(args[0].toLowerCase()){
         case 'ping':
-            message.channel.send('Pong');
-            break; 
+            return message.channel.send('Pong');
         case 'server-info':
-            message.channel.send("hi?");
-            break; 
+            return message.channel.send("hi?");
         case 'icon':
-            message.channel.send(message.author.avatarURL);
-            break; 
-        case 'yuri':
-            message.reply('',{
-                files: [
-                    './images/Yuri.png'
-                ]
-            });
-            break;
-        case `why is ${args[3]}'s waifu garbo?`:
-            message.reply('Your waifu is trash');
-            break;
+            return message.channel.send(message.author.avatarURL); 
+        case 'img':
+           return message.reply('',{files:img.upload(args[1])});
+        case 'gif':
+            return message.channel.send(gif.searchGif(args[1]));
+        case 'help':
+            return message.channel.send(help.displayCommands());
+        case 'clever':
+        case 'cleverbot':
+            return;
+        default:
+            return message.channel.send('Invalid command');       
     }
 });
 

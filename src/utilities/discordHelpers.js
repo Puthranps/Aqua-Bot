@@ -9,7 +9,7 @@ String.prototype.isNumber = () => {
 };
 
 function parseArgs(str){
-    return str.slice(prefix.length).trim().toLowerCase().split(/ +/g); 
+    return str.slice(prefix.length).trim().split(/ +/g); 
 }
 
 function getCommand(str){
