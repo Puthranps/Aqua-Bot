@@ -12,6 +12,7 @@ client.on('ready', () => {
     console.log(`connected to ${owner}'s server`);
 });
 
+<<<<<<< HEAD
 // client.on("guildMemberAdd", member => {
 //     const guild = member.guild;
 //     newUsers.set(member.id, member.user);
@@ -25,6 +26,21 @@ client.on('ready', () => {
 // });
 
 client.on('message', message => {
+=======
+client.on("guildMemberAdd", (member) => {
+    const guild = member.guild;
+    newUsers.set(member.id, member.user);
+    
+    if (newUsers.size > 10) {
+      const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+      const userlist = newUsers.map(u => u.toString()).join(" ");
+      defaultChannel.send("Welcome our new users!\n" + userlist);
+      newUsers.clear();
+    }
+});
+
+client.on('message', (message) => {
+>>>>>>> c50e25ed938b7eb985a96170b859337bad6936d6
     if(message.author.bot) return; 
     if(message.content.indexOf(prefix) !== 0) return;
 
