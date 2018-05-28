@@ -12,7 +12,6 @@ client.on('ready', () => {
     console.log(`connected to ${owner}'s server`);
 });
 
-<<<<<<< HEAD
 // client.on("guildMemberAdd", member => {
 //     const guild = member.guild;
 //     newUsers.set(member.id, member.user);
@@ -26,7 +25,6 @@ client.on('ready', () => {
 // });
 
 client.on('message', message => {
-=======
 client.on("guildMemberAdd", (member) => {
     const guild = member.guild;
     newUsers.set(member.id, member.user);
@@ -40,7 +38,6 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on('message', (message) => {
->>>>>>> c50e25ed938b7eb985a96170b859337bad6936d6
     if(message.author.bot) return; 
     if(message.content.indexOf(prefix) !== 0) return;
 
