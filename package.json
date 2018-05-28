@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "axios": "^0.18.0",
-    "cleverbot-node": "^0.3.11",
+    "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
-    "get-image-urls": "^1.0.5",
-    "gif-search": "^2.0.1",
+    "giphy-random": "^1.0.5",
     "google-images": "^2.1.0",
     "image-scraper": "^0.2.1",
     "images-scraper": "^2.0.11",

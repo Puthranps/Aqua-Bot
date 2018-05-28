@@ -1,15 +1,17 @@
-const gifSearch = require('gif-search');
-
-async function searchGif(search) {
+const GiphyRandom = require('giphy-random');
+const {key} = require('../../config/giphy_config.json');
+ 
+const giphyRandom = new GiphyRandom({ apiKey: key });
+ 
+async function getGif(arg) {
     try{
-        await gifSearch.random(search);
-        await console.log(gifurl);
-        return gifurl; 
-    }catch(e){
+        let result = await giphyRandom.get({tag : arg});
+        return result.images.fixed_height_still.url;
+    } catch(e) {
         console.log(e);
     }
 }
 
 return module.exports = {
-    searchGif : searchGif
+    getGif : getGif
 }

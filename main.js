@@ -12,10 +12,22 @@ client.on('ready', () => {
     console.log(`connected to ${owner}'s server`);
 });
 
-client.on('message', (message) => {
+// client.on("guildMemberAdd", member => {
+//     const guild = member.guild;
+//     newUsers.set(member.id, member.user);
+//   ​
+//     if (newUsers.size > 10) {
+//       const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+//       const userlist = newUsers.map(u => u.toString()).join(" ");
+//       defaultChannel.send("Welcome our new users!\n" + userlist);
+//       newUsers.clear();
+//     }
+// });
+
+client.on('message', message => {
     if(message.author.bot) return; 
     if(message.content.indexOf(prefix) !== 0) return;
-     
+
     let args = util.parseArgs(message.content);
 
     switch(args[0].toLowerCase()){
@@ -30,14 +42,16 @@ client.on('message', (message) => {
                 return message.channel.send('Please insert a term to search....');
             }
             let path = '../images';
-            return message.channel.send('',{files:img.upload(args[1],path)});
+            return message.reply('',{files:img.upload(args[1], path)});
         case 'gif':
             if(args[1] === null) {
                 return message.channel.send('Please insert a term to search....');
             }
-            return message.channel.send(gif.searchGif(args[1]));
+            return message.channel.send(gif.getGif(args[1]));
         case 'help':
             return message.channel.send(help.displayCommands());
+        case 'weather': 
+            return message.channel.send();
         default:
             return message.channel.send('Invalid command');       
     }
