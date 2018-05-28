@@ -5,6 +5,7 @@ const util =  require('./src/utilities/discordHelpers.js');
 const img = require('./src/commands/img.js');
 const gif = require('./src/commands/gif.js');
 const help = require('./src/commands/help.js');
+const info = require('./src/commands/server-info.js');
 
 client.on('ready', () => {
     client.user.setActivity('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
@@ -12,13 +13,14 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
+    if(message.author.bot) return; 
+    if(message.content.indexOf(prefix) !== 0) return; 
     let args = util.parseArgs(message.content);
-
     switch(args[0].toLowerCase()){
         case 'ping':
             return message.channel.send('Pong');
         case 'server-info':
-            return message.channel.send("hi?");
+            return message.channel.send(info.serverInfo(message.content));
         case 'icon':
             return message.channel.send(message.author.avatarURL); 
         case 'img':
@@ -33,9 +35,6 @@ client.on('message', (message) => {
             return message.channel.send(gif.searchGif(args[1]));
         case 'help':
             return message.channel.send(help.displayCommands());
-        case 'clever':
-        case 'cleverbot':
-            return;
         default:
             return message.channel.send('Invalid command');       
     }
