@@ -6,11 +6,11 @@ const path = require('path');
 
 async function getObj(arg) {
     let results;
-    let rand = Math.floor(Math.random() * 4); 
+    let rand = Math.floor(Math.random() * 10); 
     try{
          results = await bing.list({
              keyword : arg,
-             num : 5,
+             num : 10,
             detail : true
         });
 
@@ -24,8 +24,9 @@ async function getObj(arg) {
     }
 }
 
-async function download(obj) {
-    const filepath = path.resolve('../images', obj.name);
+async function download(obj,path) {
+    if(!path) path = '../../images'; //primarily for debugging purposes 
+    const filepath = path.resolve(path, obj.name);
     const response = await axios({
         method: 'GET',
         url : obj.url,
@@ -55,6 +56,8 @@ async function upload(arg) {
 }
 
 return module.exports = {
+    getObj : getObj,
+    download : download,
     upload : upload   
 }
 

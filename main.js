@@ -14,8 +14,10 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
     if(message.author.bot) return; 
-    if(message.content.indexOf(prefix) !== 0) return; 
+    if(message.content.indexOf(prefix) !== 0) return;
+     
     let args = util.parseArgs(message.content);
+
     switch(args[0].toLowerCase()){
         case 'ping':
             return message.channel.send('Pong');
@@ -27,7 +29,8 @@ client.on('message', (message) => {
             if(args[1] === null) {
                 return message.channel.send('Please insert a term to search....');
             }
-           return message.channel.send('',{files:img.upload(args[1])});
+            let path = '../images';
+            return message.channel.send('',{files:img.upload(args[1],path)});
         case 'gif':
             if(args[1] === null) {
                 return message.channel.send('Please insert a term to search....');

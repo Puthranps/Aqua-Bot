@@ -1,5 +1,3 @@
-import { MessageEmbedImage } from "discord.js";
-
 async function permissions(message){
     return message.member.roles.some(roles => ['Administrator', 'Moderator'].includes(roles.name));
 }
