@@ -1,7 +1,8 @@
 const axios = require('axios');
 
-async function getWeather(arg){
-    let encodedAddress = encodeURIComponent(arg);
+async function getWeather(arg) {
+    let address = arg.toString();
+    let encodedAddress = encodeURIComponent(address);
     let geoCode = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeAddress}`;
     
     try {

@@ -6,6 +6,7 @@ const img = require('./src/commands/img.js');
 const gif = require('./src/commands/gif.js');
 const help = require('./src/commands/help.js');
 const info = require('./src/commands/server-info.js');
+const weather = require('./src/commands/weather.js');
 
 client.on('ready', () => {
     client.user.setActivity('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
@@ -29,8 +30,9 @@ client.on('message', message => {
     if(message.content.indexOf(prefix) !== 0) return;
 
     let args = util.parseArgs(message.content);
+    let command = args.shift();
 
-    switch(args[0].toLowerCase()){
+    switch(command){
         case 'ping':
             return message.channel.send('Pong');
         case 'server-info':
@@ -38,20 +40,20 @@ client.on('message', message => {
         case 'icon':
             return message.channel.send(message.author.avatarURL); 
         case 'img':
-            if(args[1] === null) {
+            if(args[0] === null) {
                 return message.channel.send('Please insert a term to search....');
             }
             let path = '../images';
-            return message.reply('',{files:img.upload(args[1], path)});
+            return message.reply('',{files:img.upload(args[0], path)});
         case 'gif':
-            if(args[1] === null) {
+            if(args[0] === null) {
                 return message.channel.send('Please insert a term to search....');
             }
-            return message.channel.send(gif.getGif(args[1]));
+            return message.channel.send(gif.getGif(args[0]));
         case 'help':
             return message.channel.send(help.displayCommands());
         case 'weather': 
-            return message.channel.send();
+            return message.channel.send(...args);
         default:
             return message.channel.send('Invalid command');       
     }
