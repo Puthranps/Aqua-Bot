@@ -5,7 +5,7 @@ async function getWeather(arg){
     let geoCode = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeAddress}`;
     
     try {
-
+        
         let response = await axios.get(geoCode);
         if(response === 'ZERO_RESULTS') return 'Unable to fetch weather, verify location.';
 
