@@ -25,12 +25,13 @@ client.on('ready', () => {
 //     }
 // });
 
-client.on('message', message => {
+client.on('message', async message => {
     if(message.author.bot) return; 
     if(message.content.indexOf(prefix) !== 0) return;
 
     let args = util.parseArgs(message.content);
     let command = args.shift();
+    console.log(args);
 
     switch(command){
         case 'ping':
