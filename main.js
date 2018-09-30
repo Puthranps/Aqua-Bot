@@ -1,16 +1,17 @@
+const jobj = require('./config.json');
+
 const Discord = require('discord.js');
-const {owner,prefix,token,dev} = require('./config.json');
+
 const client = new  Discord.Client(); 
 const util =  require('./src/utilities/discordHelpers.js');
 const img = require('./src/commands/img.js');
-const gif = require('./src/commands/gif.js');
 const help = require('./src/commands/help.js');
 const info = require('./src/commands/server-info.js');
 const weather = require('./src/commands/weather.js');
 
 client.on('ready', () => {
     client.user.setActivity('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
-    console.log(`connected to ${owner}'s server`);
+    console.log(`connected to ${jobj.owner}'s server`);
 });
 
 // client.on("guildMemberAdd", member => {
@@ -60,4 +61,6 @@ client.on('message', async message => {
     }
 });
 
-client.login(token);
+// NDk2MDI4Njk4MTYwNTI5NDE4.DpKq3Q.Bqd4VkP6a5Q_J5Hu_7pqOO5-mEE
+
+client.login("NDk2MDI4Njk4MTYwNTI5NDE4.DpKq3Q.Bqd4VkP6a5Q_J5Hu_7pqOO5-mEE");
