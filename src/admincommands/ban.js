@@ -1,5 +1,5 @@
 #Test remote commit
-
+#Test remote commit2
 class Ban {
     constructor(member, reason, modRight){
         this.member = member; 
