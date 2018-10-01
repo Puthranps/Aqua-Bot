@@ -5,8 +5,6 @@
     "axios": "^0.18.0",
     "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
-    "giphy-random": "^1.0.5",
-    "google-images": "^2.1.0",
     "image-scraper": "^0.2.1",
     "images-scraper": "^2.0.11",
     "path": "^0.12.7"
