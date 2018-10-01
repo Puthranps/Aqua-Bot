@@ -2,17 +2,20 @@ let Scraper = require('images-scraper');
 let bing = new Scraper.Bing();
 const axios = require('axios');
 const fs = require('fs');
-const path = require('path');
+const Path = require('path');
 
 async function getObj(arg) {
     let results;
-    let rand = Math.floor(Math.random() * 10); 
-    try{
+    let rand = Math.floor(Math.random() * 1); 
+    
+    try {
          results = await bing.list({
              keyword : arg,
-             num : 10,
+             num : 1,
             detail : true
         });
+
+        //console.log(results);
 
         return {
             url : results[rand].url,
@@ -24,40 +27,31 @@ async function getObj(arg) {
     }
 }
 
-async function download(obj,path) {
-    if(!path) path = '../../images'; //primarily for debugging purposes 
-    const filepath = path.resolve(path, obj.name);
+ async function download(obj) {
+    const path = Path.resolve('images/', 'code.jpg'); //primarily for debugging purposes 
+    console.log("Download beginning");
+
     const response = await axios({
         method: 'GET',
-        url : obj.url,
+        url : obj.url.toString(),
         responseType : 'stream'
-    });
+    })
 
-    response.data.pipe(fs.createWriteStream(filepath));
+    response.data.pipe(fs.createWriteStream(path));
 
     return new Promise((resolve, reject) => {
         response.data.on('end', () => {
-            resolve();
-        });
-
-        response.data.on('error', err => { 
-            reject(err);
+            resolve()
         })
-    });
-}
-
-async function upload(arg) {
-    let obj = await getObj(arg);
-    await download(obj);
-
-    return [
-        `./images/${obj.name}`
-    ];
+    
+        response.data.on('error', () => {
+          reject()
+        })
+      });
 }
 
 return module.exports = {
     getObj : getObj,
-    download : download,
-    upload : upload   
+    download : download
 }
 
