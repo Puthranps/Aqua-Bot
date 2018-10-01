@@ -1,12 +1,17 @@
+const jobj = require('./config.json');
+
+const prefix = jobj.prefix;
+const token = jobj.token;
+const owner = jobj.owner;
+const dev = jobj.dev;
+
 const Discord = require('discord.js');
-const {owner,prefix,token,dev} = require('./config.json');
+
 const client = new  Discord.Client(); 
 const util =  require('./src/utilities/discordHelpers.js');
 const img = require('./src/commands/img.js');
-const gif = require('./src/commands/gif.js');
 const help = require('./src/commands/help.js');
 const info = require('./src/commands/server-info.js');
-const weather = require('./src/commands/weather.js');
 
 client.on('ready', () => {
     client.user.setActivity('Playing with Coconut Meme ( ͡° ͜ʖ ͡°)');
@@ -26,11 +31,13 @@ client.on('ready', () => {
 // });
 
 client.on('message', async message => {
+
     if(message.author.bot) return; 
     if(message.content.indexOf(prefix) !== 0) return;
 
     let args = util.parseArgs(message.content);
     let command = args.shift();
+
     console.log(args);
 
     switch(command){
@@ -42,19 +49,28 @@ client.on('message', async message => {
             return message.channel.send(message.author.avatarURL); 
         case 'img':
             if(args[0] === null) {
-                return message.channel.send('Please insert a term to search....');
+                return message.channel.send('Please insert a term to search...');
             }
-            let path = '../images';
-            return message.reply('',{files:img.upload(args[0], path)});
-        case 'gif':
-            if(args[0] === null) {
-                return message.channel.send('Please insert a term to search....');
-            }
-            return message.channel.send(gif.getGif(args[0]));
+            path = './images'
+            await img.getObj(args[0])
+            .then( obj => {
+                 img.download(obj)
+                    .then(function (result) {
+                        console.log("Downloaded success!!!")
+                        console.log(obj.name);
+                        return message.channel.send({files: [`${path}/code.jpg`]} );
+    
+                    }).catch(function(err) {
+                        console.log("inside error");
+                        console.log(err)
+                });
+            }).catch( (err) => {
+                console.log("outside error");
+                console.log(err);
+            });
+
         case 'help':
             return message.channel.send(help.displayCommands());
-        case 'weather': 
-            return message.channel.send(...args);
         default:
             return message.channel.send('Invalid command');       
     }

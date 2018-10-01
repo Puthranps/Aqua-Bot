@@ -1,4 +1,6 @@
-const {owner, prefix} = require('../../config.json')
+const jobj = require('../../config.json');
+
+const prefix = jobj.prefix
 
 String.prototype.capitalize = () => {
     return this.charAt(0).toUpperCase();
