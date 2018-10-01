@@ -28,7 +28,7 @@ async function getObj(arg) {
 }
 
  async function download(obj) {
-    const path = Path.resolve('images/', 'code.jpg'); //primarily for debugging purposes 
+    const path = Path.resolve('images/', 'code.jpg'); 
     console.log("Download beginning");
 
     const response = await axios({

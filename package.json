@@ -1,5 +1,5 @@
 {
-  "name": "Aqua Bot",
+  "name": "aqua_bot",
   "version": "0.0.1",
   "dependencies": {
     "axios": "^0.18.0",
@@ -12,6 +12,6 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.18.4"
   }
 }
